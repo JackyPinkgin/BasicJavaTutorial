@@ -9,6 +9,8 @@ public class P322_EqualsExercise {
         Person person1 = new Person("jacky", 15, 'm');
         Person person2 = new Person("jacky", 15, 'm');
 
+        System.out.println(person1);
+
         //没有重新equals方法
         System.out.println(person1.equals(person2));
         System.out.println(person1.equals(person1));
@@ -20,6 +22,15 @@ class Person {
     private String name;
     private int age;
     private char gender;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", gender=" + gender +
+                '}';
+    }
 
     //重新object的equals方法
     public boolean equals(Object obj) {
