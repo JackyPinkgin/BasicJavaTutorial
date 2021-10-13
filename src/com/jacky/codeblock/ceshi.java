@@ -14,4 +14,6 @@ abstract class Test1{
         System.out.println("jacky");
     }
 
+
+
 }
