@@ -12,9 +12,6 @@ public class Practice {
     }
 }
 
-
-
-
 //单例模式
 class Singleton{
 
@@ -39,7 +36,6 @@ class Singleton{
     }
 
 }
-
 
 class Sample{
 

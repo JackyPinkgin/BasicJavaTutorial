@@ -37,6 +37,8 @@ class Outer04 {
                 System.out.println("hello xinde = " + i + "fulei aa = " + super.aa + " neibu= " + n);
             }
 
+
+            //直接在匿名内部类里添加新的方法是不可以的
             public void shuchu() {
                 System.out.println("匿名内部类新建的方法");
             }

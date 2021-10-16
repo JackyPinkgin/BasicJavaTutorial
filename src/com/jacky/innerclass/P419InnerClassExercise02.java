@@ -15,6 +15,13 @@ public class P419InnerClassExercise02 {
                 System.out.println("小伙伴上课了");
             }
         });
+        cellPhone.check(new BB(){
+            @Override
+            public void say() {
+                System.out.println("什么都不想说");
+            }
+        });
+        cellPhone.check(new BB());
     }
 }
 
@@ -26,5 +33,16 @@ interface Bell{
 class CellPhone{
     public void alarmClock(Bell bell){
         bell.ring();
+    }
+    public void check(BB bb){
+        bb.say();
+    }
+
+}
+
+
+class BB{
+    public void say(){
+        System.out.println("说点什么好呢？");
     }
 }
