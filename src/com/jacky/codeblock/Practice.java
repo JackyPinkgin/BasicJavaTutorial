@@ -7,13 +7,11 @@ public class Practice {
         Test a = new Test();
         Singleton b = Singleton.getInstance();
         System.out.println(b.getName());
-
-
     }
 }
 
 //单例模式
-class Singleton{
+class Singleton {
 
     private String name;
 
@@ -23,7 +21,7 @@ class Singleton{
 
     private static Singleton s = new Singleton("Mary");
 
-    public static Singleton getInstance(){
+    public static Singleton getInstance() {
         return s;
     }
 
@@ -37,7 +35,7 @@ class Singleton{
 
 }
 
-class Sample{
+class Sample {
 
     Sample(String s) {
         System.out.println(s);//1  "静态成员sam初始化"     3 "sam1 成员初始化"
