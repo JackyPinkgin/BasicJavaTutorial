@@ -5,29 +5,33 @@ package com.jacky.enumeration;
  * @version 1.0
  * @date 2021/10/16
  */
-public class P426Enumeration02 {
+public class P427Enumeration03 {
     public static void main(String[] args) {
         System.out.println(Season2.SPRING);
         System.out.println(Season2.AUTUMN);
+
+        Season2[] values = Season2.values();
+        for (Season2 value : values) {
+            System.out.println(value.name());
+        }
+        for (Season2 value : values) {
+            
+        }
     }
 }
 
 //自定义枚举实现
-class Season{
+enum Season2 {
+    SPRING("春天","温暖"),WINTER("冬天","寒冷"),AUTUMN("秋天","凉爽"),SUMMER("夏天","炎热")/*,WHAT*/;
+
     private String name;
     private String desc;
 
-    public final static Season SPRING = new Season("春天","温暖");
-    public final static Season WINTER = new Season("冬天","寒冷");
-    public final static Season AUTUMN = new Season("秋天","凉爽");
-    public final static Season SUMMER = new Season("夏天","炎热");
+    //如果使用的无参构造器，创建常量对象，则可以直接使用这种类型的定义"WHAT"
+    Season2() {
+    }
 
-
-    //构造器私有化，防止被外部new
-    //去掉set相关方法
-    //在season内部，直接创建固定的对象
-    //优化，可以加入final修饰符
-    private Season(String name, String desc) {
+    private Season2(String name, String desc) {
         this.name = name;
         this.desc = desc;
     }
