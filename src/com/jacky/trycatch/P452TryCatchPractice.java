@@ -23,6 +23,7 @@ public class P452TryCatchPractice {
         System.out.println("你输入的整数是：" + i);
 
         System.out.println("learn new things about git");
+        System.out.println("editing on github");
 
 
     }
