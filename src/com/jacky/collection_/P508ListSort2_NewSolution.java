@@ -1,12 +1,14 @@
 package com.jacky.collection_;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 2021/10/22
  */
 @SuppressWarnings("all")
-public class P508ListSort {
+public class P508ListSort2_NewSolution {
     public static void main(String[] args) {
 
 //        List list = new ArrayList();
@@ -23,17 +25,17 @@ public class P508ListSort {
         for (Object o :list) {
             System.out.println(o);
         }
-        sortCuntome(list, new Comparator() {
+
+        System.out.println("-----------");
+
+        list.sort(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                BookNew bookNew1 = (BookNew)o1;
-                double price1 = bookNew1.getPrice();
-                BookNew bookNew2 = (BookNew)o2;
-                double price2 = bookNew2.getPrice();
-                return (int)(price1-price2);
+                BookNew book1 = (BookNew)o1;
+                BookNew book2 = (BookNew)o2;
+                return (int)(book1.getPrice()-book2.getPrice());
             }
         });
-        System.out.println("-----------");
 
         for (Object o :list) {
             System.out.println(o);
@@ -61,12 +63,12 @@ public class P508ListSort {
 }
 
 
-class Book{
+class BookNew {
     private String name;
     private String author;
     private double price;
 
-    public Book(String name, String author, double price) {
+    public BookNew(String name, String author, double price) {
         this.name = name;
         this.author = author;
         this.price = price;
