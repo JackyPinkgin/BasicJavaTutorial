@@ -17,7 +17,6 @@ public class P544TreeSet_ {
             }
         });
         treeSet.add("Jakcy");
-        treeSet.add("tom");
         treeSet.add("a");
         treeSet.add("bc");
         treeSet.add("tt");
