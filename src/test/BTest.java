@@ -12,6 +12,9 @@ public class BTest {
         LocalDate past = LocalDate.of(2020,11,14);
         System.out.println(past.plusDays(340));
 
+        Runtime runtime = Runtime.getRuntime();
+        System.out.println(runtime.availableProcessors());
+
 //        Collections.reverse();
 
     }
