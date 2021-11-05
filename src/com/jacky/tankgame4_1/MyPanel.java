@@ -1,4 +1,4 @@
-package com.jacky.tankgame4;
+package com.jacky.tankgame4_1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,20 +61,20 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
         g.fillRect(0, 0, 1000, 750);//填充矩形，默认黑色
         drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 1);//画出主角坦克
 
-//        //画出hero射击的子弹
-//        if (hero.shot != null && hero.shot.isLive) {
-//            g.fill3DRect(hero.shot.x, hero.shot.y, 2, 2, false);
-//        }
+        //画出hero射击的子弹
+        if (hero.shot != null && hero.shot.isLive) {
+            g.fill3DRect(hero.shot.x, hero.shot.y, 2, 2, false);
+        }
 
         //将shots子弹集合遍历取出绘制
-        for (int i = 0; i < hero.shots.size(); i++) {
-            Shot shot = hero.shots.get(i);
-            if (shot != null && shot.isLive) {
-                g.fill3DRect(shot.x, shot.y, 2, 2, false);
-            }else {//如果shot对象已经无效，就从shots集合中拿掉
-                hero.shots.remove(shot);
-            }
-        }
+//        for (int i = 0; i < hero.shots.size(); i++) {
+//            Shot shot = hero.shots.get(i);
+//            if (shot != null && shot.isLive) {
+//                g.fill3DRect(shot.x, shot.y, 2, 2, false);
+//            }else {//如果shot对象已经无效，就从shots集合中拿掉
+//                hero.shots.remove(shot);
+//            }
+//        }
 
 
 
@@ -171,22 +171,22 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     }
 
     //如果坦克可以发出多个子弹，判断子弹是否击中敌人时，需要子弹集合中所有子弹都取出和敌人的所有坦克进行判断
-    public void hitEnemyTank(){
-        for (int j = 0; j < hero.shots.size(); j++) {
-            Shot shot = hero.shots.get(j);
-            if (shot != null && shot.isLive) {
-                //遍历敌人所有坦克
-                for (int i = 0; i < enemyTanks.size(); i++) {
-                    EnemyTank enemyTank = enemyTanks.get(i);
-                    hitTank(shot, enemyTank);
-                    //可以在判断hitTank方法里删掉enemyTank
-    //                    if (!enemyTank.isLive) {
-    //                        enemyTanks.remove(enemyTank);
-    //                    }
-                }
-            }
-        }
-    }
+//    public void hitEnemyTank(){
+//        for (int j = 0; j < hero.shots.size(); j++) {
+//            Shot shot = hero.shots.get(j);
+//            if (shot != null && shot.isLive) {
+//                //遍历敌人所有坦克
+//                for (int i = 0; i < enemyTanks.size(); i++) {
+//                    EnemyTank enemyTank = enemyTanks.get(i);
+//                    hitTank(shot, enemyTank);
+//                    //可以在判断hitTank方法里删掉enemyTank
+//    //                    if (!enemyTank.isLive) {
+//    //                        enemyTanks.remove(enemyTank);
+//    //                    }
+//                }
+//            }
+//        }
+//    }
 
     //编写方法判断子弹是否击中敌人坦克
     public void hitTank(Shot s, EnemyTank enemyTank) {
@@ -248,13 +248,13 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             }
         } else if (e.getKeyCode() == KeyEvent.VK_J) {
             //如果按下J键，就发射一枚子弹
-//            System.out.println("用户按下了J，开始射击");
-//            if (hero.shot==null || !hero.shot.isLive) {
-//                hero.shotEnemyTank();
-//            }
+            System.out.println("用户按下了J，开始射击");
+            if (hero.shot==null || !hero.shot.isLive) {
+                hero.shotEnemyTank();
+            }
 
             //发射多颗子弹
-            hero.shotEnemyTank();
+//            hero.shotEnemyTank();
         }
         this.repaint();
     }
@@ -273,9 +273,17 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
             }
 
             //判断子弹是否击中敌方坦克
-            hitEnemyTank();
-
-
+            if (hero.shot != null && hero.shot.isLive) {
+                //遍历敌人所有坦克
+                for (int i = 0; i < enemyTanks.size(); i++) {
+                    EnemyTank enemyTank = enemyTanks.get(i);
+                    hitTank(hero.shot, enemyTank);
+                    //可以在判断hitTank方法里删掉enemyTank
+                        if (!enemyTank.isLive) {
+                            enemyTanks.remove(enemyTank);
+                        }
+                }
+            }
             this.repaint();
         }
     }

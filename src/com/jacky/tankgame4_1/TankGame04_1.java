@@ -1,20 +1,19 @@
-package com.jacky.tankgame4;
+package com.jacky.tankgame4_1;
 
 import javax.swing.*;
 
 /**
  * 2021/11/2
- * 截止P608  完成了坦克可以打最多5个子弹，并且多颗子弹进行判断的逻辑
  */
-public class TankGame04 extends JFrame {
+public class TankGame04_1 extends JFrame {
 
     MyPanel mp = null;
 
     public static void main(String[] args) {
-        new TankGame04();
+        new TankGame04_1();
     }
 
-    public TankGame04()  {
+    public TankGame04_1()  {
         mp = new MyPanel();
         Thread thread = new Thread(mp);
         thread.start();

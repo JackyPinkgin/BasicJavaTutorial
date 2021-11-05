@@ -1,4 +1,4 @@
-package com.jacky.tankgame4;
+package com.jacky.tankgame4_1;
 
 import java.util.Vector;
 
@@ -11,7 +11,7 @@ public class Hero extends Tank {
 
     Shot shot = null;
     //可以发射多个子弹
-    Vector<Shot> shots = new Vector<>();
+//    Vector<Shot> shots = new Vector<>();
 
     public Hero(int x, int y) {
         super(x, y);
@@ -19,9 +19,9 @@ public class Hero extends Tank {
 
     public void shotEnemyTank(){
 
-        if (shots.size()==5){
-            return;
-        }
+//        if (shots.size()==5){
+//            return;
+//        }
 
         //创建shot对象
         switch (getDirect()){//得到坦克的坐标
@@ -40,7 +40,7 @@ public class Hero extends Tank {
         }
 
         //把新创建的shot放入shots
-        shots.add(shot);
+//        shots.add(shot);
         new Thread(shot).start();
     }
 }
