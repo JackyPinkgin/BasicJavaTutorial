@@ -8,6 +8,7 @@ public class Tank {
     private int y;
     private int direct;//表示坦克方向 0 1 2 3
     private int speed = 1;
+    boolean isLive = true;
 
     public int getSpeed() {
         return speed;
