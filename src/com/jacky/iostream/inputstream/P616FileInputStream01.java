@@ -1,9 +1,8 @@
-package com.jacky.InputStream;
+package com.jacky.iostream.inputstream;
 
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -36,11 +35,13 @@ public class P616FileInputStream01 {
         String filePath = "D:\\test1.txt";
         FileInputStream fileInputStream = new FileInputStream(filePath);
         int read = 0;
-        byte[] buff = new byte[8];
+        byte[] buff = new byte[5];
 
         while ((read=fileInputStream.read(buff))!=-1){
-            System.out.print(new String(buff, 0, read));
+            System.out.print(new String(buff, 0, read)+"|||");
         }
+
+        fileInputStream.close();
 
     }
 
