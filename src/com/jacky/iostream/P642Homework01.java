@@ -1,9 +1,7 @@
 package com.jacky.iostream;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 2021/11/9
@@ -27,6 +25,9 @@ public class P642Homework01 {
         if (!file.exists()){
             if (file.createNewFile()){
                 System.out.println("创建成功");
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,true));
+                bufferedWriter.write("你是个谁啊\n");
+                bufferedWriter.close();
             }
             else {
                 System.out.println("创建失败");
@@ -35,7 +36,13 @@ public class P642Homework01 {
             System.out.println(filepath+" 文件已经存在");
         }
 
+        FileWriter fileWriter = new FileWriter(file,true);
+        fileWriter.write("写入测试啦");
+        fileWriter.close();
 
+        FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+        fileOutputStream.write("补充说明".getBytes(StandardCharsets.UTF_8));
+        fileOutputStream.close();
 
     }
 }
