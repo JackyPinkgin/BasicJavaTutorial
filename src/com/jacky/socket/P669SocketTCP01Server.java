@@ -30,6 +30,7 @@ public class P669SocketTCP01Server {
         outputStream.write("hello,client".getBytes());
         //设置结束标记
         socket.shutdownOutput();
+        socket.shutdownInput();
 
         outputStream.close();
         inputStream.close();
