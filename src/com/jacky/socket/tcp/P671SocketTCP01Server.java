@@ -1,4 +1,4 @@
-package com.jacky.socket;
+package com.jacky.socket.tcp;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -6,8 +6,9 @@ import java.net.Socket;
 
 /**
  * 2021/11/15
+ * 字符流实现
  */
-public class P671SocketTCP01Server_1 {
+public class P671SocketTCP01Server {
     public static void main(String[] args) throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(9999);
@@ -18,20 +19,18 @@ public class P671SocketTCP01Server_1 {
         OutputStream outputStream = socket.getOutputStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-//        String s = bufferedReader.readLine();
-//        System.out.println(s);
+        String s = bufferedReader.readLine();
+        System.out.println(s);
 
-        String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            System.out.println(line);
-        }
-
-//        socket.shutdownInput();  没有必要
+//        String line = "";
+//        while ((line = bufferedReader.readLine()) != null) {
+//            System.out.println(line);
+//        }
 
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
 
         bufferedWriter.write("hello,client 字符流");
-//        bufferedWriter.newLine();
+        bufferedWriter.newLine();
         bufferedWriter.flush();
 
 

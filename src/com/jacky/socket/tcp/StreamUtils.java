@@ -1,4 +1,4 @@
-package com.jacky.socket;
+package com.jacky.socket.tcp;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
