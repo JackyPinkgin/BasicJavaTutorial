@@ -31,7 +31,6 @@ public class UserClientService {
         u.setPasswd(pwd);
 
         //链接到服务端，发送u对象
-
         socket = new Socket(InetAddress.getLocalHost(), 9999);
         //得到ObjectOutputStream对象
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
@@ -43,17 +42,18 @@ public class UserClientService {
 
         if (ms.getMsgType().equals(MessageType.MESSAGE_LOGIN_SUCCEED)) {//接口默认是public static final
 
-            b =true;
-            //创建一个和服务器端保持通信的线程->创建一个类，ClientConnectServerThread
-            //等待。。
 
+            //创建一个和服务器端保持通信的线程->创建一个类，ClientConnectServerThread
             ClientConnectServerThread clientConnectServerThread = new ClientConnectServerThread(socket);
             //启动客户端的线程
             clientConnectServerThread.start();
             //为了后面客户端的扩展，将线程放入集合中管理
+            ManageClientConnectServerThread.addClientConnectServerThread(userId,clientConnectServerThread);
+            b =true;
 
         } else {
-
+            //如果登录失败,就不能启动通信线程，要关闭Socket
+            socket.close();
         }
         return b;
 

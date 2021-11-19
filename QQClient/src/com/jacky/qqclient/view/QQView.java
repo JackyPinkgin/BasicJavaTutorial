@@ -1,6 +1,9 @@
 package com.jacky.qqclient.view;
 
+import com.jacky.qqclient.service.UserClientService;
 import com.jacky.qqclient.utils.Utility;
+
+import java.io.IOException;
 
 /**
  * 2021/11/18
@@ -9,15 +12,16 @@ public class QQView {
 
     private boolean loop = true;//控制是否显示菜单
     private String key = "";//接收用户的键盘输入
+    private UserClientService userClientService = new UserClientService();//用于登录服务器/注册用户
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         new QQView().mainView();
         System.out.println("客户端退出系统");
     }
 
 
     //显示主菜单
-    private void mainView() {
+    private void mainView() throws IOException, ClassNotFoundException {
         while (loop) {
             System.out.println("========欢迎登录网络通信系统========");
             System.out.println("\t\t 1 登录系统");
@@ -35,7 +39,7 @@ public class QQView {
                     System.out.print("请输入密  码：");
                     String pwd = Utility.readString(50);
                     //需要到服务端验证该用户是否合法
-                    if (true) {//先把逻辑打通
+                    if (userClientService.checkUser(userId,pwd)) {//先把逻辑打通
                         while (loop) {
                             System.out.println("\n=========网络通信系统二级菜单(用户 " + userId + " )=======");
                             System.out.println("\t\t 1 显示在线用户列表");
