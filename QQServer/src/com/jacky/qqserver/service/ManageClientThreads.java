@@ -27,13 +27,9 @@ public class ManageClientThreads {
         String onlineUserList = "";
         //集合遍历，遍历HashMap的key
         Set<String> names = hm.keySet();
-//        Iterator<String> iterator = names.iterator();
         for (String name : names) {
             onlineUserList += name + " ";
         }
-//        while (iterator.hasNext()) {
-//            onlineUserList += iterator.next().toString() + " ";
-//        }
         return onlineUserList;
     }
 
