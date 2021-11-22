@@ -63,6 +63,7 @@ public class UserClientService {
         //发送一个Message， 类型MESSAGE_GET_ONLINE_FRIEND
         Message message = new Message();
         message.setMsgType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+        message.setSender(u.getUserId());
 
         //发送给服务器
         try {

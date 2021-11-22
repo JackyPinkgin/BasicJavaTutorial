@@ -35,9 +35,8 @@ public class ClientConnectServerThread extends Thread{
                 if (message.getMsgType().equals(MessageType.MESSAGE_RET_ONLINE_FRIEND)){
                     //取出在线列表信息，并显示
                     //规定message的content里的名字，都用【空格】隔开
-                    System.out.println(message.getContent());
                     String[] onlineUsers = message.getContent().split(" ");
-                    System.out.println("=======当前在线用户列表=======");
+                    System.out.println("\n=======当前在线用户列表=======");
                     for (int i = 0; i < onlineUsers.length; i++) {
                         System.out.println("用户：" + onlineUsers[i]);
                     }
