@@ -42,7 +42,6 @@ public class UserClientService {
 
         if (ms.getMsgType().equals(MessageType.MESSAGE_LOGIN_SUCCEED)) {//接口默认是public static final
 
-
             //创建一个和服务器端保持通信的线程->创建一个类，ClientConnectServerThread
             ClientConnectServerThread clientConnectServerThread = new ClientConnectServerThread(socket);
             //启动客户端的线程
@@ -58,4 +57,25 @@ public class UserClientService {
         return b;
 
     }
+
+    //向服务器端请求在线用户列表
+    public void onlineFriendList(){
+        //发送一个Message， 类型MESSAGE_GET_ONLINE_FRIEND
+        Message message = new Message();
+        message.setMsgType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+
+        //发送给服务器
+        try {
+            //得到当前线程socket对应的ObjectOutputStream对象
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    ManageClientConnectServerThread.getClientConnectServerThread(u.getUserId()).getSocket().getOutputStream());
+            //发送一个Message对象，向服务端要求在线用户列表
+            oos.writeObject(message);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

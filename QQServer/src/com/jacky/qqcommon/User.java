@@ -16,6 +16,14 @@ public class User implements Serializable {
         this.passwd = passwd;
     }
 
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
     public String getUserId() {
         return userId;
     }
