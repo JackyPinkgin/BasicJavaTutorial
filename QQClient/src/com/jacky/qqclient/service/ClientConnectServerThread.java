@@ -37,6 +37,7 @@ public class ClientConnectServerThread extends Thread{
                     //规定message的content里的名字，都用【空格】隔开
                     String[] onlineUsers = message.getContent().split(" ");
                     System.out.println("\n=======当前在线用户列表=======");
+                    //为了再确认一遍commit
                     for (int i = 0; i < onlineUsers.length; i++) {
                         System.out.println("用户：" + onlineUsers[i]);
                     }
