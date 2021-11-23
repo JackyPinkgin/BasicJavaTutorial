@@ -11,7 +11,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 2021/11/22
@@ -27,7 +29,7 @@ public class QQServer {
     //ConCurrentHashMap处理了线程安全，即线程同步处理，在多线程情况下安全
     private static HashMap<String, User> validUsers = new HashMap<>();
 //    private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
-
+    private static ConcurrentHashMap<String, ArrayList<Message>> offlineMessage = new ConcurrentHashMap<>();
 
     static {//在静态代码块，初始化ValidUsers
         validUsers.put("100", new User("100", "123456"));
@@ -52,6 +54,9 @@ public class QQServer {
     public QQServer() {
         try {
             System.out.println("服务端在9999端口监听");
+            //启动推送新闻的线程
+            new Thread(new SendNewsToAllService()).start();
+
             ss = new ServerSocket(9999);
             while (true) {//当和某个客户端建立连接后，会继续监听，因此使用while循环
                 Socket socket = ss.accept();
