@@ -1,15 +1,16 @@
 package com.jacky.qqserver.service;
 
 
-
 import com.jacky.qqcommon.Message;
 import com.jacky.qqcommon.MessageType;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 2021/11/22
@@ -62,14 +63,29 @@ public class ServerConnectClientThread extends Thread {
                     //退出while循环
                     break;
                 } else if (message.getMsgType().equals(MessageType.MESSAGE_COMM_MES)) {//发送普通的一对一消息
-                    //根据message获取getterId，然后得到对应的线程
-                    ServerConnectClientThread serverConnectClientThread =
-                            ManageClientThreads.getServerConnectClientThread(message.getGetter());
-                    //再得到对应的socket对象的输出流，将message对象转发给客户端
-                    ObjectOutputStream oos =
-                            new ObjectOutputStream(serverConnectClientThread.getSocket().getOutputStream());
-                    oos.writeObject(message);//转发
-                    // 【提示】：如果客户不在线，可以保存到数据库，实现离线留言
+                    //做一个判断，确认是否message要发送的getter在线，在线就直接发，不在线就存在offlineMessage的hashmap里
+                    if (ManageClientThreads.getHm().get(message.getGetter()) != null) {
+                        //根据message获取getterId，然后得到对应的线程
+                        ServerConnectClientThread serverConnectClientThread =
+                                ManageClientThreads.getServerConnectClientThread(message.getGetter());
+                        //再得到对应的socket对象的输出流，将message对象转发给客户端
+                        ObjectOutputStream oos =
+                                new ObjectOutputStream(serverConnectClientThread.getSocket().getOutputStream());
+                        oos.writeObject(message);//转发
+                    } else {
+                        System.out.println("接收方 " + message.getGetter() + " 离线，转入离线消息HashMap");
+                        ArrayList<Message> offlineMsg = new ArrayList<>();
+//                        offlineMsg.add(message);
+                        //拿到所有离线消息的HashMap
+                        ConcurrentHashMap<String, ArrayList<Message>> offlineMessageHashMap = QQServer.getOfflineMessage();
+                        if (offlineMessageHashMap.get(message.getGetter()) != null) {
+                            offlineMessageHashMap.get(message.getGetter()).add(message);
+                        } else {
+                            //如果是空，说明是第一次给这个人发离线消息，直接新建即可
+                            offlineMsg.add(message);
+                            offlineMessageHashMap.put(message.getGetter(),offlineMsg);
+                        }
+                    }
                 } else if (message.getMsgType().equals(MessageType.MESSAGE_TO_ALL_MES)) {//发送消息到全员
                     //需要遍历管理线程的集合，把所有线程的socket得到，然后把message发送到对应的输出流里
                     HashMap<String, ServerConnectClientThread> hm = ManageClientThreads.getHm();

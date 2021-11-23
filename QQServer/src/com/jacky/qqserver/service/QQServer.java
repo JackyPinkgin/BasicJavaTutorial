@@ -31,6 +31,10 @@ public class QQServer {
 //    private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, ArrayList<Message>> offlineMessage = new ConcurrentHashMap<>();
 
+    public static ConcurrentHashMap<String, ArrayList<Message>> getOfflineMessage() {
+        return offlineMessage;
+    }
+
     static {//在静态代码块，初始化ValidUsers
         validUsers.put("100", new User("100", "123456"));
         validUsers.put("200", new User("200", "123456"));
@@ -50,6 +54,8 @@ public class QQServer {
         }
         return true;
     }
+
+
 
     public QQServer() {
         try {
@@ -75,6 +81,11 @@ public class QQServer {
                     message.setMsgType(MessageType.MESSAGE_LOGIN_SUCCEED);
                     //将Message对象回复
                     oos.writeObject(message);
+
+                    //感觉可以在这里新建一个线程，来发送msg对象
+                    //OfflineMsgSend offlineMsgSend = new OfflineMsgSend(u.getUserId(),socket);
+                    //offlineMsgSend.start();
+
                     //创建一个线程，和客户端保持通信，该线程需要持有该socket对象
                     ServerConnectClientThread serverConnectClientThread
                             = new ServerConnectClientThread(socket, u.getUserId());
