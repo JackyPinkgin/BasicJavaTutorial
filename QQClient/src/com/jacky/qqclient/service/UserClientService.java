@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 /**
  * 2021/11/19
@@ -73,6 +72,27 @@ public class UserClientService {
             //发送一个Message对象，向服务端要求在线用户列表
             oos.writeObject(message);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //编写一个方法  退出客户端，并给服务端发送一个退出系统的Message对象
+    public void logout(){
+        Message message = new Message();
+        message.setMsgType(MessageType.MESSAGE_CLIENT_EXIT);
+        message.setSender(u.getUserId());//一定要指定是哪一个客户端id
+
+        //发送Message
+        try {
+//            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            ObjectOutputStream oos
+                    = new ObjectOutputStream(
+                            ManageClientConnectServerThread.getClientConnectServerThread(u.getUserId()).
+                                    getSocket().getOutputStream());
+            oos.writeObject(message);
+            System.out.println(u.getUserId() + " 退出系统");
+            System.exit(0);//结束进程
         } catch (IOException e) {
             e.printStackTrace();
         }

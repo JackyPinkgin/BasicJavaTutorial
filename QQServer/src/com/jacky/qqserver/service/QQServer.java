@@ -1,5 +1,7 @@
 package com.jacky.qqserver.service;
 
+
+
 import com.jacky.qqcommon.Message;
 import com.jacky.qqcommon.MessageType;
 import com.jacky.qqcommon.User;
@@ -10,12 +12,10 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 2021/11/22
  * 这是服务器，在监听9999，等待客户端连接并保持通讯
- * <p>
  * 11/22 P693
  */
 public class QQServer {
