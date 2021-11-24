@@ -1,7 +1,6 @@
 package com.jacky.qqserver.service;
 
 
-
 import com.jacky.qqcommon.Message;
 import com.jacky.qqcommon.MessageType;
 import com.jacky.qqcommon.User;
@@ -13,6 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -28,7 +28,7 @@ public class QQServer {
     //HashMap没有处理线程安全，因此在多线程情况下不安全
     //ConCurrentHashMap处理了线程安全，即线程同步处理，在多线程情况下安全
     private static HashMap<String, User> validUsers = new HashMap<>();
-//    private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
+    //    private static ConcurrentHashMap<String, User> validUsers = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, ArrayList<Message>> offlineMessage = new ConcurrentHashMap<>();
 
     public static ConcurrentHashMap<String, ArrayList<Message>> getOfflineMessage() {
@@ -55,6 +55,9 @@ public class QQServer {
         return true;
     }
 
+    public void offlineMessageSend(String userId) {
+
+    }
 
 
     public QQServer() {
