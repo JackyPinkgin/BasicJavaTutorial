@@ -15,12 +15,19 @@ class Outer04 {
 
         IA tiger = new IA() {
             @Override
-            public void cry() {
-                System.out.println("老虎叫。。。");
+            public void cry(String s) {
+                System.out.println("老虎叫。。。"+s);
             }
         };
-        tiger.cry();
+        tiger.cry("wuwuwuwu");
         System.out.println(tiger.getClass());//Outer04$1
+
+        System.out.println("*********");
+
+        IA tiger2 = (s) -> System.out.println("老虎还是叫"+s);
+        tiger2.cry("lalala");
+
+        System.out.println("*********");
 
 
         Father father = new Father("jacky") {
@@ -48,7 +55,6 @@ class Outer04 {
         father.hello(Father.num);
         System.out.println(father.getClass());//Outer04$2
 
-
         //基于抽象类的匿名内部类
         Animal animal = new Animal() {
             @Override
@@ -63,7 +69,7 @@ class Outer04 {
 }
 
 interface IA {
-    public void cry();
+    public void cry(String s);
 }
 
 class Father {

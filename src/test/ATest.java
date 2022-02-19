@@ -12,21 +12,16 @@ import java.util.List;
 public class ATest {
     public static void main(String[] args) {
 
-        List list = new ArrayList();
-        list.add(null);
-        list.add(null);
-        list.add("jacky");
-        System.out.println(list);
+        StringBuilder sb = new StringBuilder();
 
-        System.out.println(list.get(2).getClass());
+        long start = System.currentTimeMillis();
 
-        System.out.println("........");
-
-        int[] a = {1,5,3,8};
-        Arrays.sort(a);
-        for (int i : a) {
-            System.out.print(i+"\t");
+        for (int i = 0; i < 20000; i++) {
+            sb.append(i);
         }
+        long end = System.currentTimeMillis();
+
+        System.out.println(end - start);
 
 
     }

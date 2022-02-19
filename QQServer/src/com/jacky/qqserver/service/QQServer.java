@@ -49,10 +49,8 @@ public class QQServer {
         if (user == null) {//说明userid没有存在validUser的key中
             return false;
         }
-        if (!user.getPasswd().equals(passwd)) {//userId正确但是passwd错误
-            return false;
-        }
-        return true;
+        //userId正确但是passwd错误
+        return user.getPasswd().equals(passwd);
     }
 
     public void offlineMessageSend(String userId) {

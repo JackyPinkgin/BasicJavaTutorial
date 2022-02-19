@@ -9,7 +9,7 @@ import java.util.Iterator;
 @SuppressWarnings("all")
 public class P549CollectionPractice02 {
     public static void main(String[] args) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Car> arrayList = new ArrayList();
         Car car = new Car("宝马", 400000);
         Car car2 = new Car("宾利", 50000000);
         arrayList.add(car);
@@ -31,7 +31,7 @@ public class P549CollectionPractice02 {
 //        arrayList.removeAll(arrayList);
 //        System.out.println(arrayList);
 
-        for (Object o :arrayList) {
+        for (Car o :arrayList) {
 
             System.out.println(o);
         }

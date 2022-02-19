@@ -17,7 +17,7 @@ public class P506ListExercise {
 
         list.add(1,"韩顺平教育");
         System.out.println("------------");
-        System.out.println(list.get(5));
+        System.out.println(list.get(0));
         System.out.println("------------");
         list.remove(6);
         list.set(7,"Jacky7");

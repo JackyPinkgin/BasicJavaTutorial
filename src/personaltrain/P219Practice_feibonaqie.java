@@ -3,14 +3,13 @@ package personaltrain;
 public class P219Practice_feibonaqie {
     public static void main(String[] args) {
 
-        F a =new F();
-        int res = a.feibo(9);
-        System.out.println(res);
+        System.out.println(F.feibo(9));
+
     }
 }
 
 class F{
-    public int feibo(int n){
+    public static int feibo(int n){
         if (n == 1||n==2) {
             return 1;
         }else {

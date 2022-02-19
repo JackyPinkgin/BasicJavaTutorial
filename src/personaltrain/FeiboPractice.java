@@ -7,8 +7,8 @@ package personaltrain;
  */
 public class FeiboPractice {
     public static void main(String[] args) {
-        for (int i = 3; i < 50; i++) {
-            System.out.println(Solution.Fibonacci(i));
+        for (int i = 3; i < 10; i++) {
+            System.out.println("第"+i+"个:"+Solution.Fibonacci(i));
         }
 //        System.out.println(Solution.Fibonacci(10));
 

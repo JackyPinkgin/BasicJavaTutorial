@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("all")
 public class P548CollectionPractice01 {
+
     public static void main(String[] args) {
         ArrayList arrayList = new ArrayList();
         arrayList.add(new News("新冠确诊病例超千万，数百万印度教信徒赴横河\"圣浴\"引民众担忧"));
