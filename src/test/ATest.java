@@ -1,9 +1,8 @@
 package test;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * 2021/10/25
@@ -12,16 +11,33 @@ import java.util.List;
 public class ATest {
     public static void main(String[] args) {
 
-        StringBuilder sb = new StringBuilder();
+//        StringBuilder sb = new StringBuilder();
+//
+//        long start = System.currentTimeMillis();
+//
+//        for (int i = 0; i < 20000; i++) {
+//            sb.append(i);
+//        }
+//        long end = System.currentTimeMillis();
+//
+//        System.out.println(end - start);
 
-        long start = System.currentTimeMillis();
 
-        for (int i = 0; i < 20000; i++) {
-            sb.append(i);
-        }
-        long end = System.currentTimeMillis();
+        List<String> list = new ArrayList<String>();
+        list.add("happy");
+        list.add("happy2");
+        list.add("happy3");
 
-        System.out.println(end - start);
+        list.forEach(s -> {
+            System.out.println(s+", hello");
+        });
+
+        list.forEach(new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println(s);
+            }
+        });
 
 
     }
