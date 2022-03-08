@@ -1,7 +1,6 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -37,7 +36,11 @@ public class ATest {
             public void accept(String s) {
                 System.out.println(s);
             }
+
         });
+
+        List<Integer> list2 = Arrays.asList(1,2,3);
+        list2.forEach(e-> System.out.println(e+1));
 
 
     }
