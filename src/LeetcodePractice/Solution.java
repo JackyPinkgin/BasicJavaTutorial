@@ -1,8 +1,6 @@
-package test;
+package LeetcodePractice;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,10 +19,11 @@ public class Solution {
         int[][] num5 = {{1, 2}, {3, 1}, {2, 4}, {2, 3}, {4, 4}};
         int[] num6 = new int[]{41, 65, 14, 80, 20, 10, 55, 58, 24, 56, 28, 86, 96, 10, 3, 84, 4, 41, 13, 32, 42, 43, 83, 78, 82, 70, 15, -41};
         int[] nums3 = {463, 191, -915, -438, 420, -135, -431, 611, 695, -605, 469, 917, 301, 70, 209, -66, 956, 7, 245, 147, 104, 633, -218, -879, -894, 208, -37, -344, -252, -684, 728, -943, 858, -557, 217, -655, -91, -308, 699, -152, -702, 916, -867, 447, 29, -207, 56, -149, 909, 980, 508, -747, -389, -718, 814, -790, 803, 299, 443, 932, -814, 495, 274, 88, -22, 373, -324, 144, -144, 421, -499, -178, -582, -124, 741, 526, 215, -538, -912, 400, 425, -693, -767, 862, -746, 462, 762, 148, 463, 191, -915, -438, 420, -135, -431, 611, 695, -605, 469, 917, 301, 70, 209, -66, 956, 7, 245, 147, 104, 633, -218, -879, -894, 208, -37, -344, -252, -684, 728, -943, 858, -557, 217, -655, -91, -308, 699, -152, -702, 916, -867, 447, 29, -207, 56, -149, 909, 980, 508, -747, -389, -718, 814, -790, 803, 299, 443, 932, -814, 495, 274, 88, -22, 373, -324, 144, -144, 421, -499, -178, -582, -124, 741, 526, 215, -538, -912, 400, 425, -693, -767, 862, -746, 462, 762, 148, -3};
-        String s = solution.reverseWords("a good    example");
-        System.out.println(s);
+        int[] num7 = {4, 1, 2};
+        int[] num8 = {0, 1, 0, 3, 12};
 
 
+        System.out.println(solution.feibonaqie(8));
     }
 
     //https://leetcode-cn.com/leetbook/read/array-and-string/yf47s/
@@ -711,13 +710,13 @@ public class Solution {
 
     //https://leetcode-cn.com/leetbook/read/array-and-string/cwuyj/
     public int removeElement(int[] nums, int val) {
-        int slow=0,fast = 0;
-        while (fast<nums.length){
-            if (nums[fast]!=val){
+        int slow = 0, fast = 0;
+        while (fast < nums.length) {
+            if (nums[fast] != val) {
                 nums[slow] = nums[fast];
                 slow++;
                 fast++;
-            }else if (nums[fast]==val){
+            } else if (nums[fast] == val) {
                 fast++;
             }
         }
@@ -729,7 +728,205 @@ public class Solution {
 
         return 0;
     }
+
+    //https://leetcode-cn.com/problems/two-sum/
+    public int[] twoSum5(int[] nums, int target) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (map.get(target - nums[i]) != null) {
+                return new int[]{map.get(target - nums[i]), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[]{0, 0};
+
+    }
+
+    //https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/
+
+    // Definition for a Node.
+    class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    }
+
+    public List<Integer> preorder(Node root) {
+        List<Integer> res = new ArrayList<>();
+        helper(root, res);
+        return res;
+    }
+
+    public void helper(Node root, List<Integer> res) {
+        if (root == null) {
+            return;
+        }
+        res.add(root.val);
+        for (Node child : root.children) {
+            helper(child, res);
+        }
+    }
+
+    //https://leetcode-cn.com/problems/next-greater-element-i/
+    //自己写的方法
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] res = new int[nums1.length];
+        //找到每一个值对应的nums2的下标
+        for (int i = 0; i < nums1.length; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                if (nums1[i] == nums2[j]) {
+                    res[i] = j;
+                }
+            }
+        }
+        for (int i = 0; i < res.length; i++) {
+            res[i] = calGreaterEle(res[i], nums2);
+        }
+        return res;
+    }
+
+    public int calGreaterEle(int index, int[] num) {
+        for (int i = index + 1; i < num.length; i++) {
+            if (num[i] > num[index]) {
+                index = num[i];
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    //看题解后的暴力解法
+    public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
+        int[] res = new int[nums1.length];
+        int m = nums1.length;
+        int n = nums2.length;
+        for (int i = 0; i < m; i++) {
+            int j = 0;
+            while (j < n && nums1[i] != nums2[j]) j++;
+            while (j < n && nums1[i] >= nums2[j]) j++;
+            res[i] = j < n ? nums2[j] : -1;
+        }
+        return res;
+    }
+
+    //看了题解后的单调栈解法
+    public int[] nextGreaterElement3(int[] nums1, int[] nums2) {
+        int[] res = new int[nums1.length];
+        Map<Integer, Integer> map = new HashMap<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            int num = nums2[i];
+            while (!stack.isEmpty() && num >= stack.peek()) {
+                stack.pop();
+            }
+            map.put(num, stack.isEmpty() ? -1 : stack.peek());
+            stack.push(num);
+        }
+        for (int i = 0; i < nums1.length; i++) {
+            res[i] = map.get(nums1[i]);
+        }
+        return res;
+    }
+
+    //https://leetcode-cn.com/problems/check-if-it-is-a-straight-line/
+    public boolean checkStraightLine(int[][] coordinates) {
+        if (coordinates == null || coordinates.length == 1) return false;
+
+        int dx = coordinates[0][0] - coordinates[1][0];
+        int dy = coordinates[0][1] - coordinates[1][1];
+
+        for (int i = 0; i < coordinates.length; i++) {
+            int x = coordinates[i][0] - coordinates[0][0];
+            int y = coordinates[i][1] - coordinates[0][1];
+            if (y * dx != x * dy) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/
+    public int sumOddLengthSubarrays(int[] arr) {
+        int sum = 0;
+        int n = arr.length;
+        for (int start = 0; start < n; start++) {
+            for (int length = 1; start + length <= n; length += 2) {
+                int end = start + length - 1;
+                for (int i = start; i <= end; i++) {
+                    sum += arr[i];
+                }
+            }
+        }
+        return sum;
+    }
+
+    //https://leetcode-cn.com/problems/move-zeroes/
+    //自己写的方法
+    public void moveZeroes(int[] nums) {
+        Deque<Integer> dq = new ArrayDeque<>();
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] != 0) {
+                dq.push(nums[i]);
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+        int size = dq.size();
+        for (int i = 0; i <= size - 1; i++) {
+            nums[i] = dq.pop();
+        }
+    }
+
+    //第二种方法
+    public void moveZeroe2(int[] nums) {
+        if (nums == null) {
+            return;
+        }
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j++] = nums[i];
+            }
+        }
+        for (int i = j; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    }
+
+    //斐波那契数计算
+    public int feibonaqie(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        int res = 0;
+        int a = 0, b = 1;
+
+        for (int i = 2; i <= n; i++) {
+            res = a+b;
+            a=b;
+            b=res;
+        }
+
+        return res;
+    }
 }
+
+
+
 
 
 

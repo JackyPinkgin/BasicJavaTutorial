@@ -25,11 +25,11 @@ public class Jdbc01 {
 
         String sql = "insert into actor values(null, 'Jacky','男','1993-10-05','110')";
 
+
         Statement statement = connect.createStatement();
         int rows = statement.executeUpdate(sql);
 
         System.out.println(rows>0?"成功":"失败");
-
         statement.close();
         connect.close();
 
