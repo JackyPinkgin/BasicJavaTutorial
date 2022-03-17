@@ -1,9 +1,7 @@
 package LeetcodePractice;
 
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Jacky
@@ -16,6 +14,11 @@ import java.util.Map;
 public class Solution2 {
     public static void main(String[] args) {
         Solution2 solution2 = new Solution2();
+        char[] s = new char[]{'a', 'b','c','d'};
+        solution2.reverseString(s);
+        for (char c : s) {
+            System.out.print(c+" ");
+        }
     }
 
     //https://leetcode-cn.com/problems/two-sum/
@@ -46,6 +49,10 @@ public class Solution2 {
         ListNode(int x) {
             val = x;
             next = null;
+        }
+
+        public ListNode() {
+
         }
     }
 
@@ -243,12 +250,123 @@ public class Solution2 {
             total += nums[j];
             j++;
             while (total >= target) {
-                res = Math.min(res, j - i);
+                res = Math.min(res, j - i); //这里没有j-i+1 是因为上面已经提前j++了
                 total -= nums[i];
                 i++;
             }
         }
         return res == nums.length + 1 ? 0 : res;
+    }
+
+    //https://leetcode-cn.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/
+    //1456. 定长子串中元音的最大数目
+    public int maxVowels(String s, int k) {
+        if (s.length() == 0 || s == null || s.length() < k) {
+            return 0;
+        }
+        Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        char[] chars = s.toCharArray();
+        int count = 0;
+        int res = 0;
+        for (int i = 0; i < k; i++) {
+            if (vowels.contains(chars[i])) {
+                count++;
+            }
+        }
+        res = Math.max(res, count);
+        for (int i = k; i < chars.length; i++) {
+            if (vowels.contains(chars[i - k])) {
+                count--;
+            }
+            if (vowels.contains(chars[i])) {
+                count++;
+            }
+            res = Math.max(res, count);
+        }
+        return res;
+    }
+
+    //官方题解
+    public int maxVowels2(String s, int k) {
+        int length = s.length();
+        int count = 0, ans = 0;
+        for (int i = 0; i < k; i++) {
+            count += isVowels(s.charAt(i));
+        }
+        ans = count;
+        for (int i = k; i < length; i++) {
+            count += isVowels(s.charAt(i)) - isVowels(s.charAt(i - k));
+            ans = Math.max(ans, count);
+        }
+        return ans;
+    }
+
+    private int isVowels(char c) {
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' ? 1 : 0;
+    }
+
+
+    //https://leetcode-cn.com/problems/fibonacci-number/
+    //509. 斐波那契数
+    public int fib(int n) {
+        if (n < 2) {
+            return n;
+        }
+        int p = 0, q = 0, r = 1;
+        for (int i = 2; i <= n; i++) {
+            p = q;
+            q = r;
+            r = p + q;
+        }
+        return r;
+    }
+
+    //https://leetcode-cn.com/problems/reverse-linked-list/
+    //206. 反转链表
+    //递归法
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode res = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return res;
+    }
+
+    //迭代法
+    public ListNode reverseList2(ListNode head) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        while (head != null && head.next != null) {
+            ListNode next = head.next;
+            ListNode tmp = dummy.next;
+            head.next = head.next.next;
+            dummy.next = next;
+            next.next = tmp;
+        }
+        return dummy.next;
+    }
+
+    //https://leetcode-cn.com/problems/reverse-string/
+    //344. 反转字符串
+    //递归法
+    public void reverseString(char[] s) {
+        if (s == null || s.length == 0) {
+            return;
+        }
+        recursion(s, 0, s.length - 1);
+    }
+
+    private void recursion(char[] s, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        recursion(s, left + 1, right - 1);
+        char tmp = s[left];
+        s[left] = s[right];
+        s[right] = tmp;
+        return;
     }
 
 
