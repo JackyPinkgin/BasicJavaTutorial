@@ -1,5 +1,7 @@
 package LeetcodePractice;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,6 +12,11 @@ import java.util.stream.Stream;
  * @date 2022/3/7
  */
 public class Solution {
+
+    @Test
+    public void checkInfo(int a){
+        System.out.println(a>10?"yes":"no");
+    }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
